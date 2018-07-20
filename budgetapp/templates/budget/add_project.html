@@ -1,0 +1,31 @@
+{% extends 'budget/base.html' %}
+{% load static %}
+{% block content %}
+<style>
+        html,body{
+          width:100%;
+          margin:0;
+            height:100%;
+            background: #e9ecef;
+        }
+    </style>
+<section class="mt-5">
+    <div class="container">
+        <form action="" method="post">
+            {% csrf_token %}
+            {{ form }}
+            <label for="categoryInput">Expense Category (Hit enter for each category)</label>
+            <input type="text" class="form-control" name="categoryInput" id="categoryInput">
+            <input type="hidden" class="form-control" name="categoryString">
+
+            <ul id="categoriesContainer">
+              
+            </ul>
+            <button class="btn btn-primary" type="submit">Start Project</button>
+        </form>
+    </div>
+</section>
+
+<script src="{% static 'js/script.js' %}"></script>
+
+{% endblock %}

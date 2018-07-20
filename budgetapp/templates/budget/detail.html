@@ -1,0 +1,102 @@
+{% extends 'budget/base.html' %}
+
+{% block content %}
+<style>
+    html,body{
+        background: #e9ecef;
+    }
+</style>
+
+<section>
+    <div class="container my-5">
+        <div class="row text-center">
+            <div class="col-md-4 my-2 col-sm-6">
+                <div class="w-100 h-100 px-4 box py-3 bg-white">
+                    <h5>Total Budget : </h5>
+                    <h1 class="font-weight-bold">{{project.budget}}</h1>
+                </div>
+            </div>
+            <div class="col-md-4 my-2 col-sm-6">
+                    <div class="w-100 h-100 px-4 box py-3 bg-white">
+                        <h5>Budget Left : </h5>
+                        <h1 class="font-weight-bold">$3000</h1>
+                    </div>
+                </div>
+                <div class="col-md-4 my-2 col-sm-6">
+                        <div class="w-100 h-100 px-4 box py-3 bg-white">
+                            <h5>Budget Left : </h5>
+                            <h1 class="font-weight-bold">$3000</h1>
+                        </div>
+                    </div>
+        </div>
+    </div>
+</section>
+<section>
+    <div class="container">
+        <div class="text-right">
+            <button data-toggle="modal" data-target="#exampleModal" class="btn btn-primary">
+                    <i class="fa fa-plus-circle" aria-hidden="true"></i>
+                Add Expense
+            </button>
+        </div>
+        <div class="row my-5">
+                <table class="table table-striped bg-white">
+                       
+                        <tbody>
+                        {% for expense in expense_list %}
+                          <tr>
+                            <th scope="row">{{ forloop.counter}}</th>
+                            <td><b>{{ expense.title }}</b></td>
+                            <td class="text-primary1 text-right">{{ expense.category.name }}</td>
+                            <td width="10%" class="text-right">${{ expense.amount }}</td>
+                            
+                            <td width="10%" class="text-right text-danger font-weight-bold"><h4>x</h4></td>
+                          </tr>
+                          {% endfor %}
+                         
+                        </tbody>
+                      </table>
+        </div>
+    </div>
+</section>
+
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="exampleModalCenterTitle">Add Expense</h5>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body">
+              <form action="" method="post">
+                  {% csrf_token %}
+                  <div class="form-group">
+                        <label for="title">Title</label>
+                        <input type="text" class="form-control" name="title" id="title" placeholder="">
+                      </div>
+                      <div class="form-group">
+                        <label for="amount">Amount</label>
+                            <input type="text" class="form-control" name="amount" id="amount" placeholder="">
+                          </div>
+                          <div class="form-group">
+                                <label for="category">category</label>
+                                <select class="form-control" id="category">
+                                    {% for category in category_list %}
+                                  <option>{{category}}</option>
+                                  {% endfor %}
+                                
+                                </select>
+                              </div>
+              </form>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+              <button type="button" class="btn btn-primary">Submit</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+{% endblock %}

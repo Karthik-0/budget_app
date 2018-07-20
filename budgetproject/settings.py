@@ -50,6 +50,13 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 
+PROJECT_PATH = os.path.realpath(os.path.dirname(__file__))
+
+
+TEMPLATE_DIRS = (
+    PROJECT_PATH + '/templates/',
+)
+
 ROOT_URLCONF = 'budgetproject.urls'
 
 TEMPLATES = [
